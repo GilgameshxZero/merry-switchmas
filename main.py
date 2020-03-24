@@ -48,15 +48,20 @@ def main(argv):
                 print("Something went wrong while scraping… Cooling down…")
                 time.sleep(COOLDOWN_S)
             if len(buttons) > 0:
-                # Send Merry an SMS.
+                # Send an SMS.
                 print(datetime.datetime.now(), "Product", url, "is available. Sending SMS…")
-                in_stock = True
                 try:
                     sms_result = sms(
                         to=opts["--sms"],
-                        body="Nintendo Switch AC available now at " + url
+                        body=url + " available. Check related products as well."
                     )
-                    print(sms_result)
+                    print("SMS result:", sms_result)
+                    in_stock = True
+
+                    # Save the soup text to a cache file.
+                    with open(".cache/page.html", "w") as file:
+                        file.write(str(soup))
+                    break
                 except:
                     traceback.print_exc()
                     print("Something went wrong while sending SMS… Cooling down…")
@@ -64,8 +69,7 @@ def main(argv):
         if not in_stock:
             print(datetime.datetime.now(), "Did not find available product.")
             time.sleep(CHECK_PERIOD_S)
-        else:
-            print("Exiting…")
+    print("Exiting…")
 
 
 if __name__ == "__main__":
