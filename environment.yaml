@@ -1,0 +1,11 @@
+name: merry-switchmas
+channels:
+  - defaults
+dependencies:
+  - pip
+  - requests
+  - beautifulsoup4
+  - pip:
+    - lib==3.0.0
+prefix: C:\Users\yanga\miniconda3\envs\merry-switchmas
+
