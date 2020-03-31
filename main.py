@@ -57,10 +57,6 @@ def main(argv):
                     )
                     print("SMS result:", sms_result)
                     in_stock = True
-
-                    # Save the soup text to a cache file.
-                    with open(".cache/page.html", "w") as file:
-                        file.write(str(soup))
                     break
                 except:
                     traceback.print_exc()
